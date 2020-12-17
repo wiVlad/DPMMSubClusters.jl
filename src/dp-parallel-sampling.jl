@@ -258,13 +258,13 @@ function fit(
             outlier_params,
         )
     return Array(dp_model.group.labels),
-    [x.cluster_params.cluster_params.distribution.Σ for x in dp_model.group.local_clusters]
+    Array([x.cluster_params.cluster_params.distribution.μ for x in dp_model.group.local_clusters]),
     dp_model.group.weights,
     iter_count,
     nmi_score_history,
     liklihood_history,
     cluster_count_history,
-    [x.cluster_params.cluster_params.distribution.μ for x in dp_model.group.local_clusters]
+    [x.cluster_params.cluster_params.distribution.Σ for x in dp_model.group.local_clusters]
 end
 
 """
