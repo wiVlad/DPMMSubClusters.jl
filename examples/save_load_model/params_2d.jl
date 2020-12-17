@@ -8,7 +8,7 @@ data_prefix = "2d1ksample"
 iterations = 99
 hard_clustering = false
 argmax_sample_stop = 10 #Change to hard assignment from soft at iterations - argmax_sample_stop
-split_stop  = 10 #Stop split/merge moves at  iterations - split_stop
+split_stop = 10 #Stop split/merge moves at  iterations - split_stop
 
 total_dim = 2
 
@@ -21,10 +21,7 @@ initial_clusters = 1
 use_dict_for_global = false
 
 
-hyper_params = niw_hyperparams(1.0,
-    [0,0],
-    5.0,
-    Matrix{Float64}(I, 2, 2)*1.0)
+hyper_params = niw_hyperparams(1.0, [0, 0], 5.0, Matrix{Float64}(I, 2, 2) * 1.0)
 
 #Saving specifics:
 enable_saving = true

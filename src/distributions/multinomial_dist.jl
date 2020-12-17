@@ -10,6 +10,11 @@ struct multinomial_dist <: distibution_sample
 end
 
 
-function log_likelihood!(r::AbstractArray,x::AbstractArray, distibution_sample::multinomial_dist , group::Int64 = -1)
-    r .= (distibution_sample.α' * x)[1,:]
+function log_likelihood!(
+    r::AbstractArray,
+    x::AbstractArray,
+    distibution_sample::multinomial_dist,
+    group::Int64 = -1,
+)
+    r .= (distibution_sample.α'*x)[1, :]
 end

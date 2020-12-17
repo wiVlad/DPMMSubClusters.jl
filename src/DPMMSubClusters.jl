@@ -12,7 +12,7 @@ using LinearAlgebra
 using JLD2
 using Clustering
 
-import Random:seed!
+import Random: seed!
 
 
 include("ds.jl")
@@ -33,7 +33,15 @@ include("dp-parallel-sampling.jl")
 include("data_generators.jl")
 
 
-export generate_gaussian_data, generate_mnmm_data, dp_parallel_sampling, dp_parallel, run_model_from_checkpoint, save_model, calculate_posterior, fit, get_labels_histogram
+export generate_gaussian_data,
+    generate_mnmm_data,
+    dp_parallel_sampling,
+    dp_parallel,
+    run_model_from_checkpoint,
+    save_model,
+    calculate_posterior,
+    fit,
+    get_labels_histogram
 
 
 end # module

@@ -264,7 +264,7 @@ function fit(
     nmi_score_history,
     liklihood_history,
     cluster_count_history,
-    Array(dp_model.group.labels_subcluster)
+    [x.cluster_params.cluster_params.distribution.Σ for x in dp_model.group.local_clusters]
 end
 
 """
@@ -288,13 +288,13 @@ Run the model (basic mode) with default `NIW` prior.
 
 # Return Values
  - `labels` Labels assignments
- - `clusters` Cluster parameters
+ - `clusters μ` Cluster μ parameters
  - `weights` The cluster weights, does not sum to `1`, but to `1` minus the weight of all uninstanistaed clusters.
  - `iter_count` Timing for each iteration
  - `nmi_score_history` NMI score per iteration (if gt suppled)
  - `likelihood_history` Log likelihood per iteration.
  - `cluster_count_history` Cluster counts per iteration.
- - `sub_labels` Sub labels assignments
+ - `clusters Σ` Cluster Σ parameters
 
 # Example:
 ```julia

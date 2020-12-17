@@ -18,8 +18,17 @@ struct mv_gaussian <: distibution_sample
 end
 
 
-function log_likelihood!(r::AbstractArray,x::AbstractMatrix, distibution_sample::mv_gaussian , group::Int64 = -1)
-     z = x .- distibution_sample.μ
-    dcolwise_dot!(r,z, distibution_sample.invΣ * z)
-    r .= -((length(distibution_sample.Σ) * Float32(log(2π)) + distibution_sample.logdetΣ)/2) .-r/2
+function log_likelihood!(
+    r::AbstractArray,
+    x::AbstractMatrix,
+    distibution_sample::mv_gaussian,
+    group::Int64 = -1,
+)
+    z = x .- distibution_sample.μ
+    dcolwise_dot!(r, z, distibution_sample.invΣ * z)
+    r .=
+        -(
+            (length(distibution_sample.Σ) * Float32(log(2π)) + distibution_sample.logdetΣ) /
+            2
+        ) .- r / 2
 end

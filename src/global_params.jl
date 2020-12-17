@@ -8,7 +8,7 @@ iterations = 100
 hard_clustering = false  #Soft or hard assignments
 initial_clusters = 1
 argmax_sample_stop = 5 #Change to hard assignment from soft at iterations - argmax_sample_stop
-split_stop  = 5#Stop split/merge moves at  iterations - split_stop
+split_stop = 5#Stop split/merge moves at  iterations - split_stop
 
 random_seed = nothing #When nothing, a random seed will be used.
 
@@ -18,17 +18,12 @@ max_clusters = Inf
 
 #Model hyperparams
 α = 10.0 #Concetration Parameter
-hyper_params = niw_hyperparams(1.0,
-    zeros(Float32,2),
-    5,
-    Matrix{Float32}(I, 2, 2)*1.0)
+hyper_params = niw_hyperparams(1.0, zeros(Float32, 2), 5, Matrix{Float32}(I, 2, 2) * 1.0)
 
 
 outlier_mod = 0.05 #Concetration Parameter
-outlier_hyper_params = niw_hyperparams(1.0,
-    zeros(Float32,2),
-    5,
-    Matrix{Float32}(I, 2, 2)*1.0)
+outlier_hyper_params =
+    niw_hyperparams(1.0, zeros(Float32, 2), 5, Matrix{Float32}(I, 2, 2) * 1.0)
 
 
 

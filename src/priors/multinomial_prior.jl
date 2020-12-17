@@ -13,7 +13,10 @@ mutable struct multinomial_sufficient_statistics <: sufficient_statistics
 end
 
 
-function calc_posterior(prior:: multinomial_hyper, suff_statistics::multinomial_sufficient_statistics)
+function calc_posterior(
+    prior::multinomial_hyper,
+    suff_statistics::multinomial_sufficient_statistics,
+)
     if suff_statistics.N == 0
         return prior
     end
@@ -24,20 +27,39 @@ function sample_distribution(hyperparams::multinomial_hyper)
     return multinomial_dist(log.(rand(Dirichlet(Float64.(hyperparams.α)))))
 end
 
-function create_sufficient_statistics(hyper::multinomial_hyper,posterior::multinomial_hyper,points::AbstractArray{Float32,2}, pts_to_group = 0)
+function create_sufficient_statistics(
+    hyper::multinomial_hyper,
+    posterior::multinomial_hyper,
+    points::AbstractArray{Float32,2},
+    pts_to_group = 0,
+)
     pts = copy(points)
     points_sum = sum(pts, dims = 2)[:]
     S = pts * pts'
-    return multinomial_sufficient_statistics(size(points,2),points_sum)
+    return multinomial_sufficient_statistics(size(points, 2), points_sum)
 end
 
-function log_marginal_likelihood(hyper::multinomial_hyper, posterior_hyper::multinomial_hyper, suff_stats::multinomial_sufficient_statistics)
+function log_marginal_likelihood(
+    hyper::multinomial_hyper,
+    posterior_hyper::multinomial_hyper,
+    suff_stats::multinomial_sufficient_statistics,
+)
     D = length(suff_stats.points_sum)
     logpi = log(pi)
-    val = logabsgamma(sum(hyper.α))[1] -logabsgamma(sum(posterior_hyper.α))[1] + sum((x-> logabsgamma(x)[1]).(posterior_hyper.α) - (x-> logabsgamma(x)[1]).(hyper.α))
+    val =
+        logabsgamma(sum(hyper.α))[1] - logabsgamma(sum(posterior_hyper.α))[1] + sum(
+            (x -> logabsgamma(x)[1]).(posterior_hyper.α) -
+            (x -> logabsgamma(x)[1]).(hyper.α),
+        )
     return val
 end
 
-function aggregate_suff_stats(suff_l::multinomial_sufficient_statistics, suff_r::multinomial_sufficient_statistics)
-    return multinomial_sufficient_statistics(suff_l.N+suff_r.N, suff_l.points_sum + suff_r.points_sum)
+function aggregate_suff_stats(
+    suff_l::multinomial_sufficient_statistics,
+    suff_r::multinomial_sufficient_statistics,
+)
+    return multinomial_sufficient_statistics(
+        suff_l.N + suff_r.N,
+        suff_l.points_sum + suff_r.points_sum,
+    )
 end
