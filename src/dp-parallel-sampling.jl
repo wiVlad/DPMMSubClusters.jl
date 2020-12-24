@@ -259,7 +259,7 @@ function fit(
         )
     return Array(dp_model.group.labels),
     Array([x.cluster_params.cluster_params.distribution.μ for x in dp_model.group.local_clusters]),
-    dp_model.group.weights,
+    Array(dp_model.group.weights),
     iter_count,
     nmi_score_history,
     liklihood_history,
